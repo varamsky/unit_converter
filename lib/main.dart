@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text("Unit Conversion"),
             backgroundColor: Colors.green,
-            //elevation: 0.0,
           ),
           body: ListView(
             children: <Widget>[
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
               ListWidget(Icons.alarm,"Time"),
               ListWidget(Icons.sim_card,"Digital Storage"),
               ListWidget(Icons.directions_run,"Length"),
-              // ListWidget(Icons.directions_run,"Length"),
               ListWidget(Icons.pregnant_woman,"Mass"),
               ListWidget(Icons.power,"Energy"),
             ],

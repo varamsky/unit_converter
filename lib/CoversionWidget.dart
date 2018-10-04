@@ -20,8 +20,13 @@ class _ConversionWidgetState extends State<ConversionWidget> {
 
   var _menu1Value;
   var _menu2Value;
-  var _inputValue;
-  var _outputValue;
+  double _inputValue;
+  double _outputValue;
+
+  double _inputFactor;
+  double _outputFactor;
+
+  TextEditingController _textController = TextEditingController();
 
   //_ConversionWidgetState(this._ConversionType);
 
@@ -35,7 +40,10 @@ class _ConversionWidgetState extends State<ConversionWidget> {
     _menu1Value = _unitsList[0];
     _menu2Value = _unitsList[1];
 
-    _outputValue = '';
+    _inputFactor = 1.0;
+    _outputFactor = factorsList[1];
+
+    _outputValue = 0.0;
   }
 
   @override
@@ -53,8 +61,24 @@ class _ConversionWidgetState extends State<ConversionWidget> {
             _makeTextField(context, 'Input'),
             _makeDropDown(context, 1),
             //_makeTextField(context, 'Output'),
+            IconButton(
+              icon: Icon(Icons.swap_vert,size: 40.0,color: Colors.blueGrey,),
+              onPressed: (){
+                var factor = _inputFactor;
+                var menu = _menu1Value;
+                setState(() {
+                  _textController.text = '0.0';
+                  _inputValue = 0.0;
+                  _outputValue = 0.0;
+                  _inputFactor = _outputFactor;
+                  _outputFactor = factor;
+                  _menu1Value = _menu2Value;
+                  _menu2Value = menu;
+                });
+              },
+            ),
             _outputHeading(),
-            _makeText(_outputValue),
+            _makeText(_outputValue.toString()),
             _makeDropDown(context, 2),
           ],
         ),
@@ -80,6 +104,7 @@ class _ConversionWidgetState extends State<ConversionWidget> {
               color: Colors.lightGreen,
             ),
             child: TextField(
+              controller:  _textController,
               keyboardType: TextInputType.number,
               style: TextStyle(
                 color: Colors.white,
@@ -100,8 +125,13 @@ class _ConversionWidgetState extends State<ConversionWidget> {
                 print(input);
                 //_makeText('1235');
                 setState(() {
-                  _inputValue = input;
-                  _outputValue = input;
+                  _inputValue = double.parse(input);
+                  //_outputValue = input;
+                  //_outputValue = ((double.parse(input) * _outputFactor) / double.parse(_inputFactor)).toString();
+                  _outputValue = (_inputValue * _outputFactor) / _inputFactor;
+                  //_outputValue = 123.321;
+                  print('input : $_inputValue  outputfactor : $_outputFactor  inputfactor : $_inputFactor');
+                  print(_outputValue.runtimeType);
                 });
                 _makeDropDown(context, 2);
               },
@@ -226,10 +256,23 @@ class _ConversionWidgetState extends State<ConversionWidget> {
           ).toList(),
           onChanged: (var newValue) {
             setState(() {
-              if (menuId == 1)
+              if (menuId == 1) {
                 _menu1Value = newValue;
+                for(int i=0;i<_unitsList.length;i++){
+                  if(_unitsList[i] == _menu1Value){
+                    _inputFactor = factorsList[i];
+                    break;
+                  }
+                }
+              }
               else
                 _menu2Value = newValue;
+              for(int i=0;i<_unitsList.length;i++){
+                if(_unitsList[i] == _menu2Value){
+                  _outputFactor = factorsList[i];
+                  break;
+                }
+              }
             });
           }, //onChanged: null,
         ),

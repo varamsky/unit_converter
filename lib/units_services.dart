@@ -10,6 +10,8 @@ PhysicalQuantity time;
 PhysicalQuantity digitalStorage;
 PhysicalQuantity energy;
 
+List<double> factorsList;
+
 Future _loadUnitsAsset() async {
   return await rootBundle.loadString('assets/units.json');
 }
@@ -45,37 +47,44 @@ List<String> getListOfUnits(String quantityName) {
   List<String> unitList = List();
   print("~~Inside getListOfUnits() before for loop: ");
 
+  factorsList = List();
   Unit unit;
 
   switch (quantityName) {
     case 'Length':
       for (unit in length.unitsList) {
         unitList.add(unit.unitName);
+        factorsList.add(unit.unitConversionFactor);
       }
       break;
     case 'Mass':
       for (unit in mass.unitsList) {
         unitList.add(unit.unitName);
+        factorsList.add(unit.unitConversionFactor);
       }
       break;
     case 'Time':
       for (unit in time.unitsList) {
         unitList.add(unit.unitName);
+        factorsList.add(unit.unitConversionFactor);
       }
       break;
     case 'Digital Storage':
       for (unit in digitalStorage.unitsList) {
         unitList.add(unit.unitName);
+        factorsList.add(unit.unitConversionFactor);
       }
       break;
     case 'Energy':
       for (unit in energy.unitsList) {
         unitList.add(unit.unitName);
+        factorsList.add(unit.unitConversionFactor);
       }
       break;
   }
 
 
   print("~~Inside getListOfUnits() after for loop: ");
+  print(factorsList);
   return unitList;
 }
