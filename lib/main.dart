@@ -4,6 +4,7 @@ import 'package:unit_converter/units_services.dart';
 
 void main() {
   //"Length":"Mass":"Time":"Digital Storage":"Energy"
+  loadUnits('Currency');
   loadUnits('Length');
   loadUnits('Mass');
   loadUnits('Time');

@@ -25,10 +25,6 @@ class ListWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.lightGreen,
               borderRadius: BorderRadius.circular(15.0),
-              /*border: Border.all(
-                color: Colors.black,
-                width: 1.0,
-              ),*/
             ),
             child: Row(
                 children: <Widget>[

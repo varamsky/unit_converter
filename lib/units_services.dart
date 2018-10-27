@@ -2,6 +2,8 @@ import 'package:unit_converter/units.dart';
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:unit_converter/api_units.dart';
+import 'package:unit_converter/api_units_services.dart';
 
 //"Length":"Mass":"Time":"Digital Storage":"Energy"
 PhysicalQuantity length;
@@ -9,20 +11,25 @@ PhysicalQuantity mass;
 PhysicalQuantity time;
 PhysicalQuantity digitalStorage;
 PhysicalQuantity energy;
+ApiUnits apiUnits;
 
 List<double> factorsList;
+
+String url = 'https://flutter.udacity.com/currency/';
 
 Future _loadUnitsAsset() async {
   return await rootBundle.loadString('assets/units.json');
 }
 
 Future loadUnits(String quantityName) async {
-  print("Entering loadUnits()");
   String jsonString = await _loadUnitsAsset();
   final jsonResponse = json.decode(jsonString);
-  print("before object of physicalQuantity");
+
 
   switch (quantityName) {
+    case 'Currency':
+      apiUnits = await getUnit();
+      break;
     case 'Length':
       length = PhysicalQuantity.fromJSON(jsonResponse, quantityName);
       break;
@@ -42,15 +49,20 @@ Future loadUnits(String quantityName) async {
 }
 
 List<String> getListOfUnits(String quantityName) {
-  print("~~Inside getListOfUnits(): ");
-
   List<String> unitList = List();
-  print("~~Inside getListOfUnits() before for loop: ");
 
   factorsList = List();
   Unit unit;
 
+  ApiUnit apiUnit;
+
   switch (quantityName) {
+    case 'Currency':
+      for(apiUnit in apiUnits.units){
+        unitList.add(apiUnit.name);
+        factorsList.add(apiUnit.conversion);
+      }
+      break;
     case 'Length':
       for (unit in length.unitsList) {
         unitList.add(unit.unitName);
@@ -82,9 +94,5 @@ List<String> getListOfUnits(String quantityName) {
       }
       break;
   }
-
-
-  print("~~Inside getListOfUnits() after for loop: ");
-  print(factorsList);
   return unitList;
 }

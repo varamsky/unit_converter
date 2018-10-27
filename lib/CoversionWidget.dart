@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/units_services.dart';
 
 class ConversionWidget extends StatefulWidget {
-  //"Length":"Mass":"Time":"Digital Storage":"Energy"
-
   var _ConversionType;
 
   ConversionWidget(this._ConversionType);
@@ -27,8 +25,6 @@ class _ConversionWidgetState extends State<ConversionWidget> {
   double _outputFactor;
 
   TextEditingController _textController = TextEditingController();
-
-  //_ConversionWidgetState(this._ConversionType);
 
   _ConversionWidgetState(var conversionType) {
     this._ConversionType = conversionType;
@@ -60,7 +56,6 @@ class _ConversionWidgetState extends State<ConversionWidget> {
           children: <Widget>[
             _makeTextField(context, 'Input'),
             _makeDropDown(context, 1),
-            //_makeTextField(context, 'Output'),
             IconButton(
               icon: Icon(Icons.swap_vert,size: 40.0,color: Colors.blueGrey,),
               onPressed: (){
@@ -123,13 +118,9 @@ class _ConversionWidgetState extends State<ConversionWidget> {
               onSubmitted: (String input) {
                 print('~~~On Text Field Changed : ');
                 print(input);
-                //_makeText('1235');
                 setState(() {
                   _inputValue = double.parse(input);
-                  //_outputValue = input;
-                  //_outputValue = ((double.parse(input) * _outputFactor) / double.parse(_inputFactor)).toString();
                   _outputValue = (_inputValue * _outputFactor) / _inputFactor;
-                  //_outputValue = 123.321;
                   print('input : $_inputValue  outputfactor : $_outputFactor  inputfactor : $_inputFactor');
                   print(_outputValue.runtimeType);
                 });
@@ -182,15 +173,6 @@ class _ConversionWidgetState extends State<ConversionWidget> {
         ),
       ),
     );
-    /*return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: Colors.lightGreen,
-          child: Text(
-              text
-          ),
-      ),
-    );*/
   }
 
   Widget _outputHeading() {
@@ -238,9 +220,7 @@ class _ConversionWidgetState extends State<ConversionWidget> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           value: (menuId == 1) ? _menu1Value : _menu2Value,
-          //style: Theme.of(context).textTheme.title,
           style: Theme.of(context).textTheme.title,
-          //items: menuList().map(
           items: _unitsList.map(
             (String value) {
               return DropdownMenuItem<String>(
