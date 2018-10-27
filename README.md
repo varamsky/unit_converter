@@ -2,7 +2,7 @@
 
 ##### A unit converter app using Flutter.
 
-This particular project is inspired from the Flutter corse on Udacity :- https://www.udacity.com/course/ud905
+This particular project is inspired from the Flutter course on Udacity :- https://www.udacity.com/course/ud905
 
 This project also uses the made-up Currecncy API in the above mentioned course for the API calls :- https://flutter.udacity.com/currency/
 
