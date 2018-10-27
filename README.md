@@ -6,10 +6,10 @@ This particular project is inspired from the Flutter corse on Udacity :- https:/
 
 This project also uses the made-up Currecncy API in the above mentioned course for the API calls :- https://flutter.udacity.com/currency/
 
-<img align="left" width="400" height="700" src="https://github.com/varamsky/unit_converter/blob/master/Screenshot_1.jpeg">
+<img align="left" width="400" height="700" src="https://github.com/varamsky/unit_converter/blob/master/Screenshot_01.jpeg">
 
 
-<img align="right" width="400" height="700" src="https://github.com/varamsky/unit_converter/blob/master/Screenshot_2.jpeg">
+<img align="right" width="400" height="700" src="https://github.com/varamsky/unit_converter/blob/master/Screenshot_02.jpeg">
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
